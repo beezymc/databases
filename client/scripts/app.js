@@ -22,7 +22,6 @@ var App = {
 
   fetch: function(callback = ()=>{}) {
     Parse.readAll((data) => {
-      data = JSON.parse(data);
       // Don't bother to update if we have no messages
       if (data && data.length) {
         Rooms.update(data, RoomsView.render);

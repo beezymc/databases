@@ -65,8 +65,8 @@ describe('Persistent Node Chat Server', () => {
 
   it('Should output all messages from the DB', (done) => {
     // Let's insert a message into the db
-    const queryString = 'INSERT INTO users (username) VALUES ($); INSERT INTO rooms (roomname) VALUES ($); INSERT INTO messages (text, userId, roomId) VALUE ($, (SELECT id FROM users WHERE username = $), (SELECT id FROM rooms WHERE roomname = $));';
-    const queryArgs = ['joey', 'lobby', 'joey was here', 'joey', 'lobby'];
+    const queryString = 'INSERT INTO users (username) VALUES ($); INSERT INTO messages (text, userId, roomname) VALUE ($, (SELECT id FROM users WHERE username = $), $);';
+    const queryArgs = ['joey', 'joey was here', 'joey', 'lobby'];
     /* TODO: The exact query string and query args to use here
      * depend on the schema you design, so I'll leave them up to you. */
     dbConnection.query(queryString, queryArgs, (err) => {
